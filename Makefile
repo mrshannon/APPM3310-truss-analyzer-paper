@@ -2,6 +2,7 @@
 all: paper.pdf
 
 paper.pdf: paper.tex biber images
+	pdflatex paper.tex
 
 .PHONY: biber
 biber: paper.bib paper_precompile
