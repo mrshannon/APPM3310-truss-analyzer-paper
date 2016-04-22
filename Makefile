@@ -12,5 +12,7 @@ paper_precompile: paper.tex
 	pdflatex paper.tex
 
 .PHONY: clean
-clear:
+clean:
 	rm -f *.aux *.bbl *.bcf *.blg *.log *.run.xml
+
+
