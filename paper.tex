@@ -12,6 +12,7 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{enumitem}
 
 \usepackage{abstract}
 \renewcommand{\abstractname}{}
@@ -35,6 +36,122 @@
 
 
 \section{Mathematical Formulation}
+
+Most of the following formulation follows directly from
+\parencite{felippa2004}.
+
+In this paper the accompanying tools use the direct stiffness method.  This
+method is based on using known forces and displacements as well as the modulus
+of elasticity of the structure members to back out displacements.  In this
+way, it is unlike the direct force method which can only solve statically
+determinate systems as the direct stiffness method can solve indeterminate
+systems as well by properly splitting the stress among the truss members.
+
+The direct stiffness method involves 8 steps.  The first two are purely
+conceptual and thus are never really performed and the last one is a post
+processing step performed after a solution is found.  These eight steps are
+outlined below (taken from Figure 2.5 of \cite{felippa2004}).
+\begin{enumerate}[noitemsep]
+    \item Disconnection
+    \item Localization
+    \item Element Formation
+    \item Globalization
+    \item Merge
+    \item Application of Boundary Conditions
+    \item Solution
+    \item Recovery of Derived Quantities
+\end{enumerate}
+
+The disconnection step is essentially just looking at each truss member
+(element) individually while localization is just looking at member based
+coordinate systems.  Therefore, this paper will skip directly to the first
+step requiring actual work, \emph{element formation}.
+
+
+\subsection{Element Formation}
+
+The eventual goal is to find the master stiffness equation
+\begin{equation}
+    \mathbf{f}=K\mathbf{u} \label{eq:master_stiffness_equation}
+\end{equation}
+where $\mathbf{f}$ is the vector of external forces, $\mathbf{u}$ the vector
+of displacements, and $K$ the linear relation between the two.  This equation
+is in a global coordinate frame.  $K$ is $n\times{}n$ where $n$ is the number
+of nodes (endpoint of one or more members) times the number of dimensions
+which for the remainder of this document will be taken as 2.
+
+Before the master stiffness equation can be written a relation between
+displacement and external force for each element must be developed.  To do
+this, the elements of the truss are treated as springs and therefore governed
+by Hook's law.
+\begin{equation}
+    f=k_su \label{eq:hooks_law}
+\end{equation}
+where $f$ is the force, $u$ is the displacement, and $k_s$ is the stiffness of
+the spring, which for an element of constant cross sectional area $A$, of
+length $L$ and made of a material with elastic modulus $E$ is given by:
+\begin{equation}
+    k_s=\frac{EA}{L} \label{eq:stiffness_coefficient}
+\end{equation}
+
+By making the simplification that nodes cannot impart any torque on elements
+the only equation governing an element is Hook's law.  In the element centered
+coordinate frame the one dimensional Hook's law, Eq.~(\ref{eq:hooks_law}) is
+enough.  However, in order to convert this into the global coordinate frame a
+full dimensional equation is needed.  This equation will be designated as the
+local stiffness equation:
+\begin{equation}
+    \overline{\mathbf{f}}=\overline{K}\overline{\mathbf{u}}
+    \label{eq:local_stiffness_equation}
+\end{equation}
+This equation is in a member centric coordinate frame with the origin placed
+on the first node of the element and the $x$-axis along the element, pointing
+to the 2nd node.  The direction of all other axes are unimportant.  Therefore,
+in the 2-dimensional case $\overline{K}$ becomes:
+\begin{equation}
+    \overline{K}=\frac{EA}{L}\begin{bmatrix*}[r]
+        1&0&-1&0\\
+        0&0&0&0\\
+        -1&0&1&0\\
+        0&0&0&0
+    \end{bmatrix*}
+\end{equation}
+The 3-dimensional case can be easily obtained by adding 2 zero rows and 2 zero
+columns.
+
+
+\subsection{Globalization}
+
+Before the global stiffness matrix can be formed
+Eq.~(\ref{eq:local_stiffness_equation}) must be converted into the global
+coordinate frame equation:
+\begin{equation}
+    \mathbf{f}^e=K^e\mathbf{u}^e
+\end{equation}
+which relates displacement to force for a single element $e$ in the global
+coordinate frame.  Eq.~(\ref{eq:global_to_local}) shows the relation between the
+global coordinate frame and the local coordinate frame.
+\begin{equation}
+    \overline{\mathbf{u}}^e=T^e\mathbf{u},\qquad
+    \overline{\mathbf{f}}^e=T^e\mathbf{f}
+    \label{eq:global_to_local}
+\end{equation}
+
+
+
+\subsection{Merge}
+
+
+\subsection{Application of Boundary Conditions}
+
+
+\subsection{Solution}
+
+
+\subsection{Recovery of Derived Quantities}
+
+
+
 
 
 \section{Examples and Numerical Results}
