@@ -224,10 +224,35 @@ external forces in the proper indices which can also be obtained from the
 
 \subsection{Application of Boundary Conditions}
 
+Eq.~(\ref{eq:master_stiffness_equation}) is singular because while the truss
+is \emph{hopefully} self constrained at this point it is not constrained in
+space.  This is because Eq.~(\ref{eq:master_stiffness_equation}) does not yet
+take into acount the fact that $\mathbf{u}$ is under some restrictions due to
+constraints on the physical truss.  For the purpose of this paper, and the
+accompanying software \parencite{shannon2016}, constraints will be limited to
+one of the principal ($xyz$) dimensions.  Therefore, some of the entries of
+$\mathbf{u}$ are forced to be zero and in these locations the force is
+unknown.  The normal way to handle this is to simply remove the associated
+rows and columns from $\mathbf{f}$, $\mathbf{u}$, and $K$.  However, in a
+software package this either requires special logic when implementing
+Eq.~(\ref{eq:global_to_master}) or requires reallocating a new $K$ matrix
+after the fact.
 
+Therefore, in this paper the computer friendly method outlined in section
+3.5.2 of \cite{felippa2004ch3} is used.  This method involves setting the
+diagonals of $K$ that correspond to the constrained parts of $\mathbf{u}$ to 1
+and the corresponding values in $\mathbf{f}$ to 0.  This forces those elements
+of $\mathbf{u}$ to solve to 0 displacement.  This is a simple $O(n)$ operation
+instead of the higher order delete of rows and columns.
 
 
 \subsection{Solution}
+
+Finally, Eq.~(\ref{eq:master_stiffness_equation}) is non-singular and thus can
+be solved by any number of methods.  The result is the column vector of
+displacements $\mathbf{u}$.  This gives the displacements of each node and
+therefore the displacement of the endpoints of each element.  This is enough
+to plot the new layout of the truss under load.
 
 
 \subsection{Recovery of Derived Quantities}
@@ -245,7 +270,7 @@ external forces in the proper indices which can also be obtained from the
 \section{Conclusion}
 
 
-\nocite{*}
+% \nocite{*}
 \printbibliography{}
 
 
