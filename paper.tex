@@ -2,7 +2,7 @@
 
 \title{APPM 3310 Project\\\Large{Static Analysis of Truss Systems}}
 \author{Sammy Chang\and{}Ryan Marizza\and{}Michael Shannon}
-\date{Friday, April 29, 2016}
+\date{Section: 002\\\vspace{1em}Friday, April 29, 2016}
 
 \usepackage{hyperref}
 \hypersetup{colorlinks=true, urlcolor=blue, linkcolor=blue, citecolor=blue}
@@ -291,6 +291,29 @@ to plot the new layout of the truss under load.
 
 
 \subsection{Recovery of Derived Quantities}
+
+While the deformation for the truss is known at this point the stresses in the
+elements are the desired quantity to determine if the goal is to determine if
+the truss will break.  The first step is to find the change in length of each
+element.  This is done by extracting the displacement values from $\mathbf{u}$
+for each element reforming each $\mathbf{u}^e$.
+Eq.~(\ref{eq:global_to_local}) is then used to move the displacement back into
+the element local coordinate frame.  At this point only the two x-coordinate
+displacement values (at each end of the element) are nonzero as an element can
+only deform along its axis (given the simplifications used in this paper).
+Subtracting one from the other gives the change in length
+\parencite{felippa2004ch3}:
+\begin{equation}
+    d^e=\overline{\mathbf{u}}^e_{xj}-\overline{\mathbf{u}}^e_{xi}
+\end{equation}
+where $j$ is the 2nd node of the element and $i$ is the first.  Using this
+result the longitudinal stress and force in the element is given by:
+\begin{equation}
+    \sigma^e=\frac{E^e}{L^e}d^e,\qquad
+    F^e=\sigma^eA^e
+\end{equation}
+At this point, both the truss deformation and element stresses are known and
+therefore the figures shown in this paper can be plotted.
 
 
 
