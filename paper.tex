@@ -99,25 +99,27 @@ the only equation governing an element is Hook's law.  In the element centered
 coordinate frame the one dimensional Hook's law, Eq.~(\ref{eq:hooks_law}) is
 enough.  However, in order to convert this into the global coordinate frame a
 full dimensional equation is needed.  This equation will be designated as the
-local stiffness equation:
+local stiffness equation for element $e$:
 \begin{equation}
-    \overline{\mathbf{f}}=\overline{K}\overline{\mathbf{u}}
+    \overline{\mathbf{f}}^e=\overline{K}^e\overline{\mathbf{u}}^e
     \label{eq:local_stiffness_equation}
 \end{equation}
 This equation is in a member centric coordinate frame with the origin placed
 on the first node of the element and the $x$-axis along the element, pointing
 to the 2nd node.  The direction of all other axes are unimportant.  Therefore,
-in the 2-dimensional case $\overline{K}$ becomes:
+in the 2-dimensional case $\overline{K}^e$ becomes:
 \begin{equation}
-    \overline{K}=\frac{EA}{L}\begin{bmatrix*}[r]
+    \overline{K}^e=\frac{EA}{L}\begin{bmatrix*}[r]
         1&0&-1&0\\
         0&0&0&0\\
         -1&0&1&0\\
         0&0&0&0
-    \end{bmatrix*}
+    \end{bmatrix*} \label{eq:kbar}
 \end{equation}
 The 3-dimensional case can be easily obtained by adding 2 zero rows and 2 zero
 columns.
+
+
 
 
 \subsection{Globalization}
@@ -126,16 +128,48 @@ Before the global stiffness matrix can be formed
 Eq.~(\ref{eq:local_stiffness_equation}) must be converted into the global
 coordinate frame equation:
 \begin{equation}
-    \mathbf{f}^e=K^e\mathbf{u}^e
+    \mathbf{f}^e=K^e\mathbf{u}^e\label{eq:global_stiffness_equation}
 \end{equation}
 which relates displacement to force for a single element $e$ in the global
-coordinate frame.  Eq.~(\ref{eq:global_to_local}) shows the relation between the
-global coordinate frame and the local coordinate frame.
+coordinate frame.  Let $\mathbf{x}$ be a vector in the global coordinate
+system and $\overline{\mathbf{x}}$ be the equivalent vector in the element
+local coordinate frame.  Then the relation between the two is given by
+\parencite{olver2006}:
+\begin{equation}
+    S\overline{\mathbf{x}}=\mathbf{x}\qquad\text{where}\qquad
+    S=\left\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\right\}
+\end{equation}
+With the $\mathbf{v}$ vectors forming a basis for the element centered
+coordinate system.  In particular, $v_1$ is the unit vector along the element.
+If the other columns of $S$ are chosen such that $S$ is orthonormal then
+$S^{-1}=S^{T}$.  Therefore, the reverse transformation is:
+\begin{equation}
+    \overline{\mathbf{x}}=S^{-1}\mathbf{x}=S^T\mathbf{x}
+\end{equation}
+Noting that $\mathbf{u}$ and $\mathbf{f}$ are stacked vectors that rotate
+though each coordinate twice the appropriate transformation matrix for element
+$e$ becomes:
+\begin{equation}
+    T^e=\begin{pmatrix}
+        S^T&O\\O&S^T
+    \end{pmatrix}
+\end{equation}
+Therefore, Eq.~(\ref{eq:global_to_local}) shows the relation between the
+global coordinate frame and the local coordinate frame for the force and
+displacement vectors.
 \begin{equation}
     \overline{\mathbf{u}}^e=T^e\mathbf{u},\qquad
     \overline{\mathbf{f}}^e=T^e\mathbf{f}
     \label{eq:global_to_local}
 \end{equation}
+By combining Eq.~(\ref{eq:local_stiffness_equation},
+\ref{eq:global_stiffness_equation}, \ref{eq:global_to_local}) the global
+stiffness matrix (for element $e$), $K^e$ can be related to the local
+stiffness matrix $\overline{K}^e$ by:
+\begin{equation}
+    K^e=(T^e)^T\overline{K}^eT^e
+\end{equation}
+
 
 
 
