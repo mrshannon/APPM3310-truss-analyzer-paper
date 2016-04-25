@@ -38,7 +38,29 @@ code does have the ability to solve 3D systems.
 \end{abstract}
 
 
+
+
 \section{Introduction}
+The truss analyzer implements the DSM by simplifying and idealizing a given
+truss system. By that, all of the joints are converted to frictionless pin
+joins, and we will ignore the bending of individual truss members. Our
+idealization for most cases is satisfactory for an elementary truss analysis.
+Therefore we will only be observing the axial forces and the displacements at
+the pin joints. Our truss analyzer "converts" the pins and members to a node
+and an element, respectively under the Cartesian coordinate system.
+Furthermore, we are able to apply external forces only at the joints. This
+will allow us to simulate displacement in all the nodes of the truss system.
+The analyzer works by inputting a truss system, the code then identifies
+individual elements. When the elements are identified, the truss system is
+disassembled at the nodes. The elements are further analyzed using stiffness
+equations dependent on the geometry and the elastic moduli of the elements.
+Once those elements have been analyzed, the code re-assembles the structure
+with the stiffness of the elements. The element stiffness matrix is then
+modified by applying the displacements and externally applied forces at the
+nodes. A final matrix is obtained (global stiffness matrix) which can be
+solved using the displacement and force vectors by applying the Cholesky
+decomposition. Using DSM allows us to analyze complex truss structures as well
+as statically indeterminate structures.
 
 
 
