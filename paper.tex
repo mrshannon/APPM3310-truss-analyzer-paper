@@ -13,6 +13,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage{listings}
 
 \usepackage{abstract}
 \renewcommand{\abstractname}{}
@@ -38,7 +39,7 @@
 \section{Mathematical Formulation}
 
 Most of the following formulation follows directly from
-\parencite{felippa2004}.
+\parencite{felippa2004ch2} and \parencite{felippa2004ch3}.
 
 In this paper the accompanying tools use the direct stiffness method.  This
 method is based on using known forces and displacements as well as the modulus
@@ -50,7 +51,7 @@ systems as well by properly splitting the stress among the truss members.
 The direct stiffness method involves 8 steps.  The first two are purely
 conceptual and thus are never really performed and the last one is a post
 processing step performed after a solution is found.  These eight steps are
-outlined below (taken from Figure 2.5 of \cite{felippa2004}).
+outlined below (taken from Figure 2.5 of \cite{felippa2004ch2}).
 \begin{enumerate}[noitemsep]
     \item Disconnection
     \item Localization
@@ -124,7 +125,7 @@ columns.
 
 \subsection{Globalization}
 
-Before the global stiffness matrix can be formed
+Before the master stiffness matrix can be formed,
 Eq.~(\ref{eq:local_stiffness_equation}) must be converted into the global
 coordinate frame equation:
 \begin{equation}
@@ -175,8 +176,55 @@ stiffness matrix $\overline{K}^e$ by:
 
 \subsection{Merge}
 
+The master stiffness equation Eq.~(\ref{eq:master_stiffness_equation}) relates
+the displacement of every node, stored in $\mathbf{u}$ to every external force
+in vector $\mathbf{f}$ using the linear transformation $K$.  The assembly of
+each $K^e$ into $K$ is governed by \parencite{felippa2004ch3}:
+\begin{enumerate}[noitemsep]
+    \item Compatibility of displacements at any given node.
+    \item Equilibrium of internal and external forces.
+\end{enumerate}
+The typical method of handling assembly of the global stiffness equations,
+Eq.~(\ref{eq:global_stiffness_equation}), is to sum the forces and sum the
+$K^e$ matrices by first expanding them to the size of $K$ by adding rows and
+columns of zeros in the appropriate locations.  In the case of the computer
+code that accompanies this document \parencite{shannon2016} the method in
+section 3.5.1 of \cite{felippa2004ch3} is used.  This is know as
+\emph{Assembly by Freedom Pointers}.  The algorithm is governed by
+Eq.~(\ref{eq:global_to_master}) copied from \cite{felippa2004ch3} and fills $K$
+by iterating through each element $e$ and then through the values in $K^e$
+where $d=4$ in the 2-dimensional case and $d=6$ in the 3-dimensional case.
+Let the number of elements in the truss be given by $m$.
+
+\begin{minipage}{\textwidth}
+\begin{equation*}
+    K_{pq}=\sum_{e=1}^{m}K_{ij}^e
+\end{equation*}
+\begin{equation}
+    \text{for}\label{eq:global_to_master}
+\end{equation}
+\begin{equation*}
+    i=1,2,\ldots,d,\quad{}j=1,2,\ldots,d\qquad{}
+    p=EFT^e(i),\quad{}q=EFT^e(j)
+\end{equation*}
+\vspace{0.1em}
+\end{minipage}
+
+The \emph{element freedom table} ($EFT^e$) is unique for each element $e$ and
+gives the row/column indices where the values in $K^e$ are to be added into
+$K$.  The specific algorithm to get $EFT^e$ is better explained in code and
+can be found at \lstinline$libs/element_freedom_table.m$ in
+\cite{shannon2016}.  In reality, $K$ is initialized to the zero matrix.  The
+force vector $\mathbf{f}$ is simply constructed by summing the known (applied)
+external forces in the proper indices which can also be obtained from the
+\emph{element freedom table}.
+
+
+
 
 \subsection{Application of Boundary Conditions}
+
+
 
 
 \subsection{Solution}
