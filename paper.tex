@@ -29,11 +29,18 @@
 
 
 \begin{abstract}
-    Abstract goes here.
+This report covers application of Linear Algebra in the Finite Element Method.
+More specifically we delve into the Direct Stiffness Method (DSM) which is one
+common method to apply FEM. Our code is able to solve 2D and 3D truss systems
+using DSM. DSM is essentially based on three knowns: forces, displacements and
+elastic modulus'. The scope of the project only covers 2D trusses, but the
+code does have the ability to solve 3D systems.
 \end{abstract}
 
 
 \section{Introduction}
+
+
 
 
 \section{Mathematical Formulation}
@@ -67,6 +74,8 @@ The disconnection step is essentially just looking at each truss member
 (element) individually while localization is just looking at member based
 coordinate systems.  Therefore, this paper will skip directly to the first
 step requiring actual work, \emph{element formation}.
+
+
 
 
 \subsection{Element Formation}
@@ -246,6 +255,8 @@ of $\mathbf{u}$ to solve to 0 displacement.  This is a simple $O(n)$ operation
 instead of the higher order delete of rows and columns.
 
 
+
+
 \subsection{Solution}
 
 Finally, Eq.~(\ref{eq:master_stiffness_equation}) is non-singular and thus can
@@ -255,7 +266,10 @@ therefore the displacement of the endpoints of each element.  This is enough
 to plot the new layout of the truss under load.
 
 
+
+
 \subsection{Recovery of Derived Quantities}
+
 
 
 
