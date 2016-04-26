@@ -328,6 +328,27 @@ therefore the figures shown in this paper can be plotted.
 
 \section{Conclusion}
 
+The truss analyzer is able to properly analyze a complex truss system based on
+three known values: forces, displacements, and elastic moduli using
+calculations based on these values and structure geometry. The analysis is
+able to break down a truss system and implement the DSM by idealizing the
+truss system, and simplifying complex real world phenomena into a manageable
+set of linear stiffness equations. These stiffness equations are used to
+describe the structure's elements, each of which can be subjected to an
+external force/displacement at a node. From this, a global stiffness matrix is
+produced and solved using the force vectors and displacement vectors. This DSM
+truss analysis can be used for complex structures and is useful when it comes
+to structures with many distinct nodes, each with distinct forces and
+displacements. Solving for the stresses on these nodes without the use of
+linear algebra is nearly impossible. Through this DSM analysis, using linear
+algebraic methods, important engineering structures, notably: bridges, wings,
+buildings, can be analyzed. Knowing the stresses on elements of these
+structures allows engineers to predict behavior of structures under force.
+Such behaviors that can be predicted are elastic deformation, plastic
+deformation, crack growth, crack propagation, and structural failure. From
+this it is easy to see why such structure analysis is important.
+
+
 
 % \nocite{*}
 \printbibliography{}
