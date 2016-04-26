@@ -1,0 +1,4 @@
+[submodule "code"]
+	path = code
+	url = git@github.com:mrshannon/APPM3310-truss-analyzer.git
+	branch = master
