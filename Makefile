@@ -15,5 +15,4 @@ paper_precompile: paper.tex
 .PHONY: clean
 clean:
 	rm -f *.aux *.bbl *.bcf *.blg *.log *.run.xml
-
-
+	rm -rf images
