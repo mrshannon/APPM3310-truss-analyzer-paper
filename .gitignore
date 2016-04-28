@@ -8,5 +8,6 @@
 *.out
 *.pdf
 *.run.xml
+*.toc
 images
 tables

@@ -1,7 +1,7 @@
 .PHONY: all
 all: paper.pdf
 
-paper.pdf: paper.tex biber plot.sh
+paper.pdf: paper.tex biber solve.sh
 	pdflatex paper.tex
 
 .PHONY: biber
@@ -16,3 +16,4 @@ paper_precompile: paper.tex
 clean:
 	rm -f *.aux *.bbl *.bcf *.blg *.log *.run.xml
 	rm -rf images
+	rm -rf tables
