@@ -16,11 +16,13 @@
 \usepackage{float}
 \usepackage{appendix}
 \usepackage{geometry}
+\usepackage{csvsimple}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
 
 
 \usepackage{bera}
 \usepackage{listings}
-\usepackage{xcolor}
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
 \definecolor{delim}{RGB}{20,105,176}
@@ -64,6 +66,7 @@
 \addbibresource{paper.bib}
 
 \begin{document}
+\pagestyle{fancy}
 
 \maketitle
 
@@ -457,7 +460,122 @@ this it is easy to see why such structure analysis is important.
 \newgeometry{top=1in, bottom=1in, left=1in, right=1in}
 \begin{appendices}
 
-\section{Code}
+
+
+
+\newpage
+\section{Input Files}\label{app:input_files}
+
+\subsection{samples/sample\_001.json}\label{app:samples/sample_001.json}
+\lstinputlisting[language=json]{code/samples/sample_001.json}
+
+\subsection{samples/sample\_002.json}\label{app:samples/sample_002.json}
+\lstinputlisting[language=json]{code/samples/sample_002.json}
+
+\subsection{samples/sample\_003.json}\label{app:samples/sample_003.json}
+\lstinputlisting[language=json]{code/samples/sample_003.json}
+
+\subsection{samples/sample\_004.json}\label{app:samples/sample_004.json}
+\lstinputlisting[language=json]{code/samples/sample_004.json}
+
+\subsection{samples/baltimore\_truss.json}\label{app:samples/baltimore_truss.json}
+\lstinputlisting[language=json]{code/samples/baltimore_truss.json}
+
+
+
+\newpage
+\section{Output Files}\label{app:output_files}
+
+Output tables of solved truss models in Appendix \ref{app:input_files}.
+
+\csvstyle{nodeTableStyle}{tabular=| r r r r r r r |,
+    table head=\hline \rowcolor{brown!50} \bfseries Node \# &
+        \bfseries x & \bfseries y & \bfseries z &
+        \bfseries dx & \bfseries dy & \bfseries dz,
+    late after head=\\\hline\hline,
+    head to column names,
+    before table=\rowcolors{2}{white!25}{gray!50},
+    late after last line={\\\hline}}
+
+\csvstyle{elementTableStyle}{tabular=| r r r r r r |,
+    table head=\hline \rowcolor{brown!50} \bfseries Element \# &
+        \bfseries Material & \bfseries Node 1 & \bfseries Node 2 &
+        \bfseries Stress & \bfseries Force,
+    late after head=\\\hline\hline,
+    head to column names,
+    before table=\rowcolors{2}{white!25}{gray!50},
+    late after last line={\\\hline}}
+
+
+\subsection{sample\_001}\label{app:tables/sample_001}
+
+\noindent
+\csvreader[nodeTableStyle]{tables/sample_001_nodes.csv}{}
+    {\node & \x & \y & \z & \dx & \dy & \dz}%
+\vspace{1em}
+
+\noindent
+\csvreader[elementTableStyle]{tables/sample_001_elements.csv}{}
+    {\element & \material & \firstnode & \secondnode & \stress & \force}%
+\vspace{1em}
+
+
+\subsection{sample\_002}\label{app:tables/sample_002}
+
+\noindent
+\csvreader[nodeTableStyle]{tables/sample_002_nodes.csv}{}
+    {\node & \x & \y & \z & \dx & \dy & \dz}%
+\vspace{1em}
+
+\noindent
+\csvreader[elementTableStyle]{tables/sample_002_elements.csv}{}
+    {\element & \material & \firstnode & \secondnode & \stress & \force}%
+\vspace{1em}
+
+
+\subsection{sample\_003}\label{app:tables/sample_003}
+
+\noindent
+\csvreader[nodeTableStyle]{tables/sample_003_nodes.csv}{}
+    {\node & \x & \y & \z & \dx & \dy & \dz}%
+\vspace{1em}
+
+\noindent
+\csvreader[elementTableStyle]{tables/sample_003_elements.csv}{}
+    {\element & \material & \firstnode & \secondnode & \stress & \force}%
+\vspace{1em}
+
+
+\subsection{sample\_004}\label{app:tables/sample_004}
+
+\noindent
+\csvreader[nodeTableStyle]{tables/sample_004_nodes.csv}{}
+    {\node & \x & \y & \z & \dx & \dy & \dz}%
+\vspace{1em}
+
+\noindent
+\csvreader[elementTableStyle]{tables/sample_004_elements.csv}{}
+    {\element & \material & \firstnode & \secondnode & \stress & \force}%
+\vspace{1em}
+
+
+\subsection{baltimore\_truss}\label{app:tables/baltimore_truss}
+
+\noindent
+\csvreader[nodeTableStyle]{tables/baltimore_truss_nodes.csv}{}
+    {\node & \x & \y & \z & \dx & \dy & \dz}%
+\vspace{1em}
+
+\noindent
+\csvreader[elementTableStyle]{tables/baltimore_truss_elements.csv}{}
+    {\element & \material & \firstnode & \secondnode & \stress & \force}%
+\vspace{1em}
+
+
+
+
+\newpage
+\section{Code}\label{app:code}
 
 This is the code from \cite{shannon2016}.
 
@@ -525,27 +643,6 @@ This is the code from \cite{shannon2016}.
 \lstinputlisting[style=Matlab-editor]{code/libs/transformation_matrix.m}
 
 
-
-
-\section{Input Files}
-
-\subsection{samples/sample\_001.json}\label{app:samples/sample_001.json}
-\lstinputlisting[language=json]{code/samples/sample_001.json}
-
-\subsection{samples/sample\_002.json}\label{app:samples/sample_002.json}
-\lstinputlisting[language=json]{code/samples/sample_002.json}
-
-\subsection{samples/sample\_003.json}\label{app:samples/sample_003.json}
-\lstinputlisting[language=json]{code/samples/sample_003.json}
-
-\subsection{samples/sample\_004.json}\label{app:samples/sample_004.json}
-\lstinputlisting[language=json]{code/samples/sample_004.json}
-
-\subsection{samples/baltimore\_truss.json}\label{app:samples/baltimore_truss.json}
-\lstinputlisting[language=json]{code/samples/baltimore_truss.json}
-
-
-\section{Output Files}
 
 
 \end{appendices}
