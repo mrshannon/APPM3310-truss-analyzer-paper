@@ -13,8 +13,47 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{enumitem}
-\usepackage{listings}
 \usepackage{float}
+\usepackage{appendix}
+\usepackage{geometry}
+
+
+\usepackage{bera}
+\usepackage{listings}
+\usepackage{xcolor}
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+\usepackage[framed, numbered]{matlab-prettifier}
 
 \usepackage{abstract}
 \renewcommand{\abstractname}{}
@@ -414,6 +453,102 @@ this it is easy to see why such structure analysis is important.
 
 % \nocite{*}
 \printbibliography{}
+
+\newgeometry{top=1in, bottom=1in, left=1in, right=1in}
+\begin{appendices}
+
+\section{Code}
+
+This is the code from \cite{shannon2016}.
+
+\subsection{config.m}\label{app:config.m}
+\lstinputlisting[style=Matlab-editor]{code/config.m}
+
+\subsection{lint.m}\label{app:lint.m}
+\lstinputlisting[style=Matlab-editor]{code/lint.m}
+
+\subsection{save\_figure.m}\label{app:save_figure.m}
+\lstinputlisting[style=Matlab-editor]{code/save_figure.m}
+
+\subsection{save\_tables.m}\label{app:save_tables.m}
+\lstinputlisting[style=Matlab-editor]{code/save_tables.m}
+
+\subsection{truss.m}\label{app:truss.m}
+\lstinputlisting[style=Matlab-editor]{code/truss.m}
+
+\subsection{libs/colormap\_lookup.m}\label{app:libs/colormap_lookup.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/colormap_lookup.m}
+
+\subsection{libs/draw\_arrow.m}\label{app:libs/draw_arrow.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/draw_arrow.m}
+
+\subsection{libs/element\_freedom\_table.m}\label{app:libs/element_freedom_table.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/element_freedom_table.m}
+
+\subsection{libs/force\_vector.m}\label{app:libs/force_vector.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/force_vector.m}
+
+\subsection{libs/global\_stiffness\_matrix.m}\label{app:libs/global_stiffness_matrix.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/global_stiffness_matrix.m}
+
+\subsection{libs/load\_model.m}\label{app:libs/load_model.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/load_model.m}
+
+\subsection{libs/local\_stiffness\_matrix.m}\label{app:libs/local_stiffness_matrix.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/local_stiffness_matrix.m}
+
+\subsection{libs/master\_stiffness\_matrix.m}\label{app:libs/master_stiffness_matrix.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/master_stiffness_matrix.m}
+
+\subsection{libs/modify\_stiffness\_matrix.m}\label{app:libs/modify_stiffness_matrix.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/modify_stiffness_matrix.m}
+
+\subsection{libs/parse\_json.m}\label{app:libs/parse_json.m}
+\url{http://www.mathworks.com/matlabcentral/fileexchange/20565-json-parser}
+
+\subsection{libs/plot\_model.m}\label{app:libs/plot_model.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/plot_model.m}
+
+\subsection{libs/solve\_displacements.m}\label{app:libs/solve_displacements.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/solve_displacements.m}
+
+\subsection{libs/solve\_forces.m}\label{app:libs/solve_forces.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/solve_forces.m}
+
+\subsection{libs/solve\_model.m}\label{app:libs/solve_model.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/solve_model.m}
+
+\subsection{libs/solve\_stresses.m}\label{app:libs/solve_stresses.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/solve_stresses.m}
+
+\subsection{libs/transformation\_matrix.m}\label{app:libs/transformation_matrix.m}
+\lstinputlisting[style=Matlab-editor]{code/libs/transformation_matrix.m}
+
+
+
+
+\section{Input Files}
+
+\subsection{samples/sample\_001.json}\label{app:samples/sample_001.json}
+\lstinputlisting[language=json]{code/samples/sample_001.json}
+
+\subsection{samples/sample\_002.json}\label{app:samples/sample_002.json}
+\lstinputlisting[language=json]{code/samples/sample_002.json}
+
+\subsection{samples/sample\_003.json}\label{app:samples/sample_003.json}
+\lstinputlisting[language=json]{code/samples/sample_003.json}
+
+\subsection{samples/sample\_004.json}\label{app:samples/sample_004.json}
+\lstinputlisting[language=json]{code/samples/sample_004.json}
+
+\subsection{samples/baltimore\_truss.json}\label{app:samples/baltimore_truss.json}
+\lstinputlisting[language=json]{code/samples/baltimore_truss.json}
+
+
+\section{Output Files}
+
+
+\end{appendices}
 
 
 \end{document}
