@@ -14,6 +14,7 @@
 \usepackage{graphicx}
 \usepackage{enumitem}
 \usepackage{listings}
+\usepackage{float}
 
 \usepackage{abstract}
 \renewcommand{\abstractname}{}
@@ -320,6 +321,50 @@ therefore the figures shown in this paper can be plotted.
 
 \section{Examples and Numerical Results}
 
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{images/sample_001.pdf}
+        \caption{Truss Analyzer on a single truss member with one external
+        force.}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{images/baltimore_truss.pdf}
+        \caption{The DSM application of FEM on a much more complicated system
+        (a Baltimore truss bridge) with 11 applied forces. This example
+        clearly depicts the practical power of such analysis.}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{images/sample_002.pdf}
+        \caption{3D analysis of a single truss with one applied force in the
+        same plane as the truss system.}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{images/sample_003.pdf}
+        \caption{The DSM application of FEM on a full three dimensional truss
+        with multiple forces in three dimensions.}
+    \end{center}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{images/sample_004.pdf}
+        \caption{The DSM application of FEM on an overconstrained truss
+        system.}
+    \end{center}
+\end{figure}
 
 
 
@@ -330,14 +375,16 @@ Truss analysis using DSM ignores many real world phenomena and has many
 limitations in terms of complexity for the sake of simplicity. A more
 realistic, yet much more complicated FEM tool could be created to analyze a
 truss system taking into account more real world phenomena and allowing for
-much more information to be imputed about the truss system. Such
-simplifications that are made by the DSM analysis are as follows: friction is
-ignored, the bending of truss members is ignored, the cross sectional area of
-each truss element is assumed to be constant, nodes do not impart torque on
-elements, and forces can only be applied at nodes. Understanding of FEM could
-be furthered by creating a more realistic truss system analyzer that takes
-these phenomena into account and allows for forces to be applied at non-node
-locations.
+much more information to be imputed about the truss system. For example we
+assume all nodes or joints, are connected by a pin joint. Such is not true for
+many bridges, as they may be connected with gusset plates or may be non rigid
+cables. The simplifications and assumptions that are made by the truss
+analyzer are as follows: friction is ignored, the bending of truss members is
+ignored, the cross sectional area of each truss element is assumed to be
+constant, nodes do not impart torque on elements, and forces can only be
+applied at nodes. On the flip side, our simple truss analyzer is powerful in
+the way that it can solve both 2D and 3D truss systems, although manual
+implementation of the input code would be extremely tedious for 3D systems.
 
 
 
@@ -345,23 +392,22 @@ locations.
 \section{Conclusion}
 
 The truss analyzer is able to properly analyze a complex truss system based on
-three known values: forces, displacements, and elastic moduli using
-calculations based on these values and structure geometry. The analysis is
-able to break down a truss system and implement the DSM by idealizing the
-truss system, and simplifying complex real world phenomena into a manageable
-set of linear stiffness equations. These stiffness equations are used to
-describe the structure's elements, each of which can be subjected to an
-external force/displacement at a node. From this, a global stiffness matrix is
-produced and solved using the force vectors and displacement vectors. This DSM
-truss analysis can be used for complex structures and is useful when it comes
-to structures with many distinct nodes, each with distinct forces and
-displacements. Solving for the stresses on these nodes without the use of
-linear algebra is nearly impossible. Through this DSM analysis, using linear
-algebraic methods, important engineering structures, notably: bridges, wings,
-buildings, can be analyzed. Knowing the stresses on elements of these
-structures allows engineers to predict behavior of structures under force.
-Such behaviors that can be predicted are elastic deformation, plastic
-deformation, crack growth, crack propagation, and structural failure. From
+three known values: forces, displacements, and elastic moduli. Using
+calculations based on these values and structure geometry. The script is able
+to break down a truss system and implement the DSM by idealizing the truss
+system, and simplifying complex real world phenomena into a manageable set of
+linear stiffness equations. These stiffness equations are used to describe the
+structure's elements, each of which can be subjected to an external force and
+a displacement at a node. From this, a global stiffness matrix is created and
+solved using the force vectors and displacement vectors. This DSM truss
+analysis can be used for complex truss structures, for a very preliminary
+design analysis. Solving for the stresses on these nodes without the use of
+linear algebra is nearly impossible and/or extremely tedious. Through this DSM
+analysis, using linear algebraic methods, more complex structures, notably:
+bridges, wings, buildings, can be analyzed. Knowing the stresses on elements
+of these structures allows engineers to predict behavior of structures under
+force. Such behaviors that can be predicted are elastic deformation, plastic
+deformation, crack growth, crack propagation, and structural failure, from
 this it is easy to see why such structure analysis is important.
 
 

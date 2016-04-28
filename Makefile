@@ -1,7 +1,7 @@
 .PHONY: all
 all: paper.pdf
 
-paper.pdf: paper.tex biber images
+paper.pdf: paper.tex biber plot.sh
 	pdflatex paper.tex
 
 .PHONY: biber
